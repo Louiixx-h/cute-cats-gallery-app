@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Cute Cats Gallery</string>
+    <string name="image_de_gato">Image de gato</string>
+    <string name="username">Username</string>
+    <string name="_851">851</string>
+    <string name="pontua_o">pontuação</string>
+    <string name="v_rios_gatos_s_o_muito_fofos">Vários gatos são muito fofos.</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+    <string name="n_o_foi_poss_vel_carregar_as_imagens">Não foi possível carregar as imagens.</string>
+    <string name="gato_triste">Gato triste</string>
+    <string name="carregar_mais">Carregar mais</string>
 </resources>
