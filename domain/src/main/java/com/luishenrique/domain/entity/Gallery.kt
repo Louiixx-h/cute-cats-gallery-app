@@ -7,8 +7,15 @@ class Gallery(
 )
 
 class Image(
-    @SerializedName("title") val title :String,
-    @SerializedName("account_url") val username :String,
-    @SerializedName("score") val score :String,
-    @SerializedName("link") val image :String
+    @SerializedName("title") val title: String,
+    @SerializedName("account_url") val username: String,
+    @SerializedName("score") val score: Int,
+    @SerializedName("images") val images: List<ImageInfo>?
+)
+
+class ImageInfo(
+    @SerializedName("type") val type: String,
+    @SerializedName("link") val link: String,
+    @SerializedName("gifv") val gifv: String,
+    @SerializedName("mp4") val mp4: String,
 )

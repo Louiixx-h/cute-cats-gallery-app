@@ -1,10 +1,15 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdk 31
+
+    viewBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.luishenrique.cutecatsgallery"
@@ -33,13 +38,22 @@ android {
 
 dependencies {
 
-    implementation project(path: ':domain')
+    api project(path: ':domain')
+
+    // progressbar cat
+    implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.9'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     // coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC'
 
     // koin
     implementation 'org.koin:koin-android-viewmodel:2.1.6'
+
+    // viewmodel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

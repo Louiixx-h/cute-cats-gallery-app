@@ -26,9 +26,13 @@ val apiServiceModule = module {
 }
 
 val repositoryModule = module {
- single { GalleryRepositoryImpl(get()) } bind GalleryRepository::class
+ factory<GalleryRepository> {
+  GalleryRepositoryImpl(apiService = get())
+ } bind GalleryRepository::class
 }
 
 val useCaseModule = module {
- single { GalleryUseCaseImpl(get()) } bind GalleryUseCase::class
+ factory<GalleryUseCase> {
+  GalleryUseCaseImpl(repository = get())
+ } bind GalleryUseCase::class
 }
