@@ -28,23 +28,26 @@ class HomeActivity : AppCompatActivity() {
         mViewModel.findAllCats()
         setObservables()
 
-        mBinding.xTryAgain.setOnClickListener {
-            mViewModel.findAllCats()
-        }
-        mBinding.xRefresh.setOnClickListener {
-            mViewModel.findAllCats()
-        }
-        mBinding.xList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (!recyclerView.canScrollVertically(1)) {
-                    mBinding.xRefresh.visibility = View.VISIBLE
-                } else {
-                    mBinding.xRefresh.visibility = View.GONE
-                }
+        with(mBinding) {
+            xRefresh.visibility = View.GONE
+            xTryAgain.setOnClickListener {
+                mViewModel.findAllCats()
             }
-        })
+            xRefresh.setOnClickListener {
+                mViewModel.findAllCats()
+            }
+            xList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+
+                    if (!recyclerView.canScrollVertically(1)) {
+                        this@with.xRefresh.visibility = View.VISIBLE
+                    } else {
+                        this@with.xRefresh.visibility = View.GONE
+                    }
+                }
+            })
+        }
     }
 
     private fun setObservables() {
