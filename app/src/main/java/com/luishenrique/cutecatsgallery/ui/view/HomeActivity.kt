@@ -29,7 +29,6 @@ class HomeActivity : AppCompatActivity() {
         setObservables()
 
         with(mBinding) {
-            xRefresh.visibility = View.GONE
             xTryAgain.setOnClickListener {
                 mViewModel.findAllCats()
             }
@@ -63,7 +62,6 @@ class HomeActivity : AppCompatActivity() {
         }
         mViewModel.stateHome.observe(this) {
             mBinding.xList.visibility = it
-            mBinding.xRefresh.visibility = it
             if (it == View.INVISIBLE) {
                 mBinding.xMessage.visibility = View.VISIBLE
                 mBinding.xTryAgain.visibility = View.VISIBLE
