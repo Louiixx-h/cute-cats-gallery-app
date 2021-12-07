@@ -1,8 +1,11 @@
 package com.luishenrique.cutecatsgallery.ui.view
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.luishenrique.cutecatsgallery.R
@@ -51,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setObservables() {
         mViewModel.gallery.observe(this) {
-            setRecyclerView(it.data)
+            setRecyclerView(it.filterToPhoto())
         }
         mViewModel.loading.observe(this) {
             if (it) {
@@ -66,6 +69,7 @@ class HomeActivity : AppCompatActivity() {
                 mBinding.xMessage.visibility = View.VISIBLE
                 mBinding.xTryAgain.visibility = View.VISIBLE
                 mBinding.xIconErrorConnection.visibility = View.VISIBLE
+                mBinding.xRefresh.visibility = View.GONE
             } else {
                 mBinding.xMessage.visibility = View.GONE
                 mBinding.xTryAgain.visibility = View.GONE
@@ -77,9 +81,22 @@ class HomeActivity : AppCompatActivity() {
     private fun setRecyclerView(images: List<Image>) {
         with(mBinding.xList) {
             layoutManager = GridLayoutManager(this@HomeActivity, 2)
-            adapter = HomeAdapter(this@HomeActivity).apply {
-                this.images = images as MutableList<Image>
+            adapter = HomeAdapter(this@HomeActivity, ::verifyPermissions).apply {
+                this.images = images
             }
         }
+    }
+
+    private fun verifyPermissions(): Boolean {
+        val permissionExternalMemory = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        if (permissionExternalMemory != PackageManager.PERMISSION_GRANTED) {
+            val storagePermission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(this, storagePermission, 1)
+            return false
+        }
+        return true
     }
 }
