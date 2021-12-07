@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setObservables() {
         mViewModel.gallery.observe(this) {
-            setRecyclerView(it.data)
+            setRecyclerView(it.filterToPhoto())
         }
         mViewModel.loading.observe(this) {
             if (it) {
@@ -78,7 +78,7 @@ class HomeActivity : AppCompatActivity() {
         with(mBinding.xList) {
             layoutManager = GridLayoutManager(this@HomeActivity, 2)
             adapter = HomeAdapter(this@HomeActivity).apply {
-                this.images = images as MutableList<Image>
+                this.images = images
             }
         }
     }

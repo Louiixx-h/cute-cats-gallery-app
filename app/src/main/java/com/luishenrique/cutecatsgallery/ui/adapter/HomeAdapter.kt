@@ -13,15 +13,15 @@ import com.luishenrique.cutecatsgallery.R
 import com.luishenrique.domain.entity.Image
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class HomeAdapter(private val context: Context): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val context: Context) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    var images: MutableList<Image> = mutableListOf()
+    var images: List<Image> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val icon = view.xIcon
         private val username = view.xUsername
@@ -31,29 +31,14 @@ class HomeAdapter(private val context: Context): RecyclerView.Adapter<HomeAdapte
             username.text = image.username
             score.text = image.score.toString()
 
-            with(image.images) {
-                when (this?.get(0)?.type) {
-                    "video/mp4" -> {
-                        Glide.with(context)
-                            .load(this[0].mp4)
-                            .override(200, 240)
-                            .diskCacheStrategy(DiskCacheStrategy.DATA)
-                            .placeholder(R.drawable.ic_cat_loading)
-                            .error(R.drawable.ic_cat_loading)
-                            .into(icon)
-                    }
-                    "image/jpeg" -> {
-                        Glide.with(context)
-                            .load(this[0].link)
-                            .override(200, 240)
-                            .diskCacheStrategy(DiskCacheStrategy.DATA)
-                            .placeholder(R.drawable.ic_cat_loading)
-                            .error(R.drawable.ic_cat_loading)
-                            .into(icon)
-                    }
-                    else -> {}
-                }
-            }
+
+            Glide.with(context)
+                .load(image.images?.get(0)?.link)
+                .override(200, 240)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .placeholder(R.drawable.ic_cat_loading)
+                .error(R.drawable.ic_cat_loading)
+                .into(icon)
         }
     }
 
