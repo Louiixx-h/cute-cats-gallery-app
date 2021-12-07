@@ -27,6 +27,10 @@ import java.io.OutputStream
 import java.lang.Exception
 import com.bumptech.glide.request.target.SimpleTarget
 import android.R.attr.resource
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 
 class HomeAdapter(
     private val context: Context,
@@ -45,17 +49,38 @@ class HomeAdapter(
         private val username = view.xUsername
         private val score = view.xScore
         private val downloadImage = view.xDownloadImage
+        private val progressBar = view.xProgressBar
 
         fun bind(image: Image) {
             username.text = image.username
             score.text = image.score.toString()
 
-
             Glide.with(context)
                 .load(image.images?.get(0)?.link)
                 .override(200, 240)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .placeholder(R.drawable.ic_cat_loading)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.visibility = View.GONE
+                        return false
+                    }
+
+                })
                 .error(R.drawable.ic_cat_loading)
                 .into(icon)
 
