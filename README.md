@@ -1,6 +1,6 @@
 # Cute Cats Gallery
 
-Galeria de gatos fofo
+Galeria de gatinhos fofos
  
  <div>
  <img src="./images/home.png" width="200"/>
