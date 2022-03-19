@@ -1,8 +1,6 @@
 # Cute Cats Gallery
 
-Galeria de gatos fofos
-
- ## [Cute Cats Gallery](https://github.com/Louiixx-h/Car-Shop)
+Galeria de gatos fofo
  
  <div>
  <img src="./images/home.png" width="200"/>
