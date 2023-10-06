@@ -19,9 +19,6 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-
       - name: Setup Gradle Cache
         uses: actions/cache@v2
         with:
@@ -32,6 +29,9 @@ jobs:
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+
+      - name: Add Gradle Wrapper
+        run: git add -f gradle/wrapper/gradle-wrapper.jar
 
       - name: Build with Gradle
         run: ./gradlew build
