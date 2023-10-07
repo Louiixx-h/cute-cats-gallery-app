@@ -20,7 +20,9 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.9.0
         with:
-          arguments: build
+          arguments: |
+            build
+            test
           gradle-version: 7.6
       - name: Run Tests
         run: ./gradlew test
