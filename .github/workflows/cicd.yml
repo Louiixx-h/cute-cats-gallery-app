@@ -17,10 +17,11 @@ jobs:
           distribution: 'adopt'
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - name: Add gradle wrapper
-        run: ./gradlew wrapper
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v2.9.0
+        with:
+          arguments: build
+          gradle-version: 6.8
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
