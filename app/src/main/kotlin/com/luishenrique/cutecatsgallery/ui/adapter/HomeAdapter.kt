@@ -1,6 +1,5 @@
 package com.luishenrique.cutecatsgallery.ui.adapter
 
-import android.R.attr
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,28 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.luishenrique.domain.entity.Image
-import kotlinx.android.synthetic.main.item_list.view.*
 import android.widget.Toast
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.BitmapDrawable
-import com.bumptech.glide.request.target.CustomTarget
-import android.os.Environment
-import com.bumptech.glide.request.transition.Transition
 import com.luishenrique.cutecatsgallery.R
 import java.io.File
 import android.graphics.Bitmap
+import android.widget.ImageView
+import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.lang.Exception
-import com.bumptech.glide.request.target.SimpleTarget
-import android.R.attr.resource
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class HomeAdapter(
     private val context: Context,
@@ -45,11 +40,11 @@ class HomeAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val icon = view.xIcon
-        private val username = view.xUsername
-        private val score = view.xScore
-        private val downloadImage = view.xDownloadImage
-        private val progressBar = view.xProgressBar
+        private val icon = view.findViewById<ImageView>(R.id.xIcon)
+        private val username = view.findViewById<TextView>(R.id.xUsername)
+        private val score = view.findViewById<TextView>(R.id.xScore)
+        private val downloadImage = view.findViewById<ImageView>(R.id.xDownloadImage)
+        private val progressBar = view.findViewById<CircularProgressIndicator>(R.id.xProgressBar)
 
         fun bind(image: Image) {
             username.text = image.username
