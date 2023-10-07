@@ -13,6 +13,8 @@ import android.graphics.drawable.Drawable
 import com.luishenrique.cutecatsgallery.R
 import java.io.File
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.os.Environment
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +26,9 @@ import java.lang.Exception
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class HomeAdapter(
