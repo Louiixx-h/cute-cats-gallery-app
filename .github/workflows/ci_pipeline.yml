@@ -20,12 +20,13 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.9.0
         with:
-          arguments: |
-            build
-            test
+          arguments: build
           gradle-version: 7.6
       - name: Run Tests
-        run: ./gradlew test
+        uses: gradle/gradle-build-action@v2.9.0
+        with:
+          arguments: test
+          gradle-version: 7.6
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
