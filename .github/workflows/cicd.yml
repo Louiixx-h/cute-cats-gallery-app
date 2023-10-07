@@ -21,7 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v2.9.0
         with:
           arguments: build
-          gradle-version: 6.8
+          gradle-version: 7.2
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
