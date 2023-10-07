@@ -1,43 +1,28 @@
 name: cute-cat-gallery-ci-pipeline
-
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
-
       - name: Setup Java JDK
         uses: actions/setup-java@v3.13.0
         with:
           java-version: '17'
           distribution: 'adopt'
-
-      - name: Setup Gradle Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-
-      - name: Add Gradle Wrapper
-        run: git add -f gradle/wrapper/gradle-wrapper.jar
-
+      - name: Add gradle wrapper
+        run: ./gradlew wrapper
       - name: Build with Gradle
         run: ./gradlew build
-
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
-          name: CuteCatsGallery.apk
+          name: CuteCatsGallery
           path: app/build/outputs/apk/app-debug.apk
