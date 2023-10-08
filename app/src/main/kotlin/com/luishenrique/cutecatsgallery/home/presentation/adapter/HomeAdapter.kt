@@ -36,7 +36,7 @@ class HomeAdapter(
     private val verifyPermissions: () -> Boolean
 ) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    var images: List<Image> = listOf()
+    var images: List<CardImageResponse> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -50,7 +50,7 @@ class HomeAdapter(
         private val downloadImage = view.findViewById<ImageView>(R.id.xDownloadImage)
         private val progressBar = view.findViewById<CircularProgressIndicator>(R.id.xProgressBar)
 
-        fun bind(image: Image) {
+        fun bind(image: CardImageResponse) {
             username.text = image.username
             score.text = image.score.toString()
 
