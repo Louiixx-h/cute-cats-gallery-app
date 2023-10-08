@@ -9,7 +9,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        def gradle_version = "7.4.2"
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
 
