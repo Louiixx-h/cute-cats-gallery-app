@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface ApiService {
+interface HomeApi {
 
     @GET("gallery/search/?q=cats")
     suspend fun finAllCats(
