@@ -1,25 +1,11 @@
 package com.luishenrique.cutecatsgallery.home.domain
 
-import com.luishenrique.domain.entity.Gallery
-import com.luishenrique.domain.handle.Result
-import com.luishenrique.domain.repository.GalleryRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.luishenrique.cutecatsgallery.home.data.repository.GalleryRepository
+import com.luishenrique.cutecatsgallery.home.domain.model.Gallery
 
-class GalleryUseCaseImpl(private val repository: GalleryRepository): GalleryUseCase {
+class GalleryUseCaseImpl(private val repository: GalleryRepository) : GalleryUseCase {
 
-    override fun findAllCats(page: Int, onSuccess: suspend (Gallery) -> Unit, onError: suspend () -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            when (val response = repository.findAllCats(page)) {
-                is Result.Success -> {
-                    if (response.data == null) onError.invoke()
-                    else onSuccess.invoke(response.data)
-                }
-                is Result.Error -> {
-                    onError.invoke()
-                }
-            }
-        }
+    override suspend fun findAllCats(page: Int) : Gallery {
+        return repository.findAllCats(page)
     }
 }

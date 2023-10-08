@@ -1,19 +1,12 @@
 package com.luishenrique.cutecatsgallery.home.data.repository
 
-import com.luishenrique.domain.ApiService
-import com.luishenrique.domain.entity.Gallery
-import com.luishenrique.domain.handle.Result
-import retrofit2.Response
+import com.luishenrique.cutecatsgallery.home.data.mapper.GalleryMapper
+import com.luishenrique.cutecatsgallery.home.data.network.ApiService
+import com.luishenrique.cutecatsgallery.home.domain.model.Gallery
 
-class GalleryRepositoryImpl(private val apiService: ApiService): GalleryRepository {
+class GalleryRepositoryImpl(private val service: ApiService) : GalleryRepository {
 
-    override suspend fun findAllCats(page: Int): Result<Gallery?> {
-        return try {
-            val response = apiService.finAllCats(page = page)
-            if (response.isSuccessful) Result.Success(data = response.body())
-            else Result.Error(exception = Exception("Falha ao buscar imagens."))
-        } catch (e: Exception) {
-            Result.Error(exception = Exception("Falha ao buscar imagens."))
-        }
+    override suspend fun findAllCats(page: Int): Gallery {
+        return GalleryMapper.mapToModel(service.finAllCats(page = page))
     }
 }

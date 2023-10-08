@@ -1,9 +1,7 @@
 package com.luishenrique.cutecatsgallery.home.data.repository
 
-import androidx.lifecycle.LiveData
-import com.luishenrique.domain.entity.Gallery
-import com.luishenrique.domain.handle.Result
+import com.luishenrique.cutecatsgallery.home.domain.model.Gallery
 
 interface GalleryRepository {
-    suspend fun findAllCats(page: Int): Result<Gallery?>
+    suspend fun findAllCats(page: Int): Gallery
 }
