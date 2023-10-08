@@ -1,4 +1,4 @@
-package com.luishenrique.cutecatsgallery.ui.view
+package com.luishenrique.cutecatsgallery.home.view
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.luishenrique.cutecatsgallery.R
 import com.luishenrique.cutecatsgallery.databinding.ActivityHomeBinding
-import com.luishenrique.cutecatsgallery.ui.adapter.HomeAdapter
-import com.luishenrique.cutecatsgallery.ui.viewmodel.HomeViewModel
+import com.luishenrique.cutecatsgallery.home.view.adapter.HomeAdapter
+import com.luishenrique.cutecatsgallery.home.view.HomeViewModel
 import com.luishenrique.domain.entity.Image
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.roger.catloadinglibrary.CatLoadingView

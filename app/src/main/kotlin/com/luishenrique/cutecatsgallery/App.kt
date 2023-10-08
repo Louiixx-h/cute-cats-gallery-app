@@ -1,7 +1,7 @@
 package com.luishenrique.cutecatsgallery
 
 import android.app.Application
-import com.luishenrique.cutecatsgallery.di.viewModelModule
+import com.luishenrique.cutecatsgallery.home.di.viewModelModule
 import com.luishenrique.domain.di.apiServiceModule
 import com.luishenrique.domain.di.repositoryModule
 import com.luishenrique.domain.di.useCaseModule

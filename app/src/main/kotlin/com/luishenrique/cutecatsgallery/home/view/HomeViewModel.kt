@@ -1,4 +1,4 @@
-package com.luishenrique.cutecatsgallery.ui.viewmodel
+package com.luishenrique.cutecatsgallery.home.view
 
 import android.view.View
 import androidx.lifecycle.LiveData
