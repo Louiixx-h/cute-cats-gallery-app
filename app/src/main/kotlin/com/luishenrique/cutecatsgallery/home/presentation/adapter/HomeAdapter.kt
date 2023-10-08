@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.luishenrique.domain.entity.Image
+import com.luishenrique.cutecatsgallery.home.data.network.response.CardImageResponse
 import android.widget.Toast
 import android.graphics.drawable.Drawable
 import com.luishenrique.cutecatsgallery.R
