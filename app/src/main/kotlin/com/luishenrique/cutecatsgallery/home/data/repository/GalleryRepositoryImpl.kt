@@ -1,4 +1,4 @@
-package com.luishenrique.domain.repository
+package com.luishenrique.cutecatsgallery.home.data.repository
 
 import com.luishenrique.domain.ApiService
 import com.luishenrique.domain.entity.Gallery

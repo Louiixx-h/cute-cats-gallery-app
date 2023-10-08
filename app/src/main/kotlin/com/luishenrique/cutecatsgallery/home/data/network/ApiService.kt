@@ -1,4 +1,4 @@
-package com.luishenrique.domain
+package com.luishenrique.cutecatsgallery.home.data.network
 
 import com.luishenrique.domain.entity.Gallery
 import retrofit2.Response

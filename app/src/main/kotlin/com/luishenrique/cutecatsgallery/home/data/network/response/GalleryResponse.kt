@@ -1,4 +1,4 @@
-package com.luishenrique.domain.entity
+package com.luishenrique.cutecatsgallery.home.data.network.response
 
 import com.google.gson.annotations.SerializedName
 

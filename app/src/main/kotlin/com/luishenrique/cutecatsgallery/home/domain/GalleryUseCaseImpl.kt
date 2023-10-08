@@ -1,4 +1,4 @@
-package com.luishenrique.domain.usecase
+package com.luishenrique.cutecatsgallery.home.domain
 
 import com.luishenrique.domain.entity.Gallery
 import com.luishenrique.domain.handle.Result

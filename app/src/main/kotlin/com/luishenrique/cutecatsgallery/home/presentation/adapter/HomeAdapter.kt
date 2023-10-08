@@ -1,4 +1,4 @@
-package com.luishenrique.cutecatsgallery.home.view.adapter
+package com.luishenrique.cutecatsgallery.home.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

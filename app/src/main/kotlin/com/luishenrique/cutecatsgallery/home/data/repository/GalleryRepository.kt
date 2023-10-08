@@ -1,4 +1,4 @@
-package com.luishenrique.domain.repository
+package com.luishenrique.cutecatsgallery.home.data.repository
 
 import androidx.lifecycle.LiveData
 import com.luishenrique.domain.entity.Gallery
