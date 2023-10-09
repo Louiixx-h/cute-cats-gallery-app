@@ -22,6 +22,11 @@ jobs:
         with:
           arguments: build
           gradle-version: 7.6
+      - name: Run KLint
+        uses: gradle/gradle-build-action@v2.9.0
+        with:
+          arguments: ktlintCheck
+          gradle-version: 7.6
       - name: Run Tests
         uses: gradle/gradle-build-action@v2.9.0
         with:
