@@ -3,7 +3,7 @@ allprojects {
 }
 buildscript {
     ext {
-        gradle_version = "8.1.2"
+        gradle_version = "7.4.2"
         kotlin_version = "1.8.10"
         koin_version = "3.5.0"
         klint_version = "9.2.1"
