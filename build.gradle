@@ -4,9 +4,10 @@ allprojects {
 buildscript {
     ext {
         gradle_version = "7.4.2"
-        kotlin_version = "1.8.10"
+        kotlin_version = "1.7.10"
         koin_version = "3.5.0"
         klint_version = "9.2.1"
+        compose_version = "1.3.1"
     }
     repositories {
         google()
