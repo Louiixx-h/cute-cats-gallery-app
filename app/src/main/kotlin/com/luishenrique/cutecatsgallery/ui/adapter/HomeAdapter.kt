@@ -13,6 +13,8 @@ import android.graphics.drawable.Drawable
 import com.luishenrique.cutecatsgallery.R
 import java.io.File
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.os.Environment
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +26,9 @@ import java.lang.Exception
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class HomeAdapter(
@@ -87,34 +91,34 @@ class HomeAdapter(
         }
 
         private fun downloadImage(imageURL: String?) {
-//                if (imageURL.isNullOrBlank() || !verifyPermissions()) return
-//                val dirPath: String = run {
-//                    Environment.getExternalStorageDirectory().absolutePath +
-//                    "/" + context.getString(R.string.app_name_storage)
-//                }
-//                val dir = File(dirPath)
-//                val fileName: String = imageURL.substring(
-//                    imageURL.lastIndexOf('/') + 1
-//                )
-//
-//                Glide.with(context)
-//                    .load(imageURL)
-//                    .into(object : CustomTarget<Drawable>() {
-//                        override fun onResourceReady(
-//                            resource: Drawable,
-//                            transition: Transition<in Drawable>?
-//                        ) {
-//                            val bitmap: Bitmap = (resource as BitmapDrawable).bitmap
-//                            Toast.makeText(
-//                                context,
-//                                "Salvando imagem...",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                            saveImage(bitmap, dir, fileName)
-//                        }
-//                        override fun onLoadCleared(placeholder: Drawable?) {}
-//                        override fun onLoadFailed(errorDrawable: Drawable?) {}
-//                })
+                if (imageURL.isNullOrBlank() || !verifyPermissions()) return
+                val dirPath: String = run {
+                    Environment.getExternalStorageDirectory().absolutePath +
+                    "/" + context.getString(R.string.app_name_storage)
+                }
+                val dir = File(dirPath)
+                val fileName: String = imageURL.substring(
+                    imageURL.lastIndexOf('/') + 1
+                )
+
+                Glide.with(context)
+                    .load(imageURL)
+                    .into(object : CustomTarget<Drawable>() {
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            transition: Transition<in Drawable>?
+                        ) {
+                            val bitmap: Bitmap = (resource as BitmapDrawable).bitmap
+                            Toast.makeText(
+                                context,
+                                "Salvando imagem...",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            saveImage(bitmap, dir, fileName)
+                        }
+                        override fun onLoadCleared(placeholder: Drawable?) {}
+                        override fun onLoadFailed(errorDrawable: Drawable?) {}
+                })
         }
 
         private fun saveImage(image: Bitmap, storageDir: File, imageFileName: String) {
