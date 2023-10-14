@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CuteCatsGallery">
         <activity
-            android:name=".ui.view.HomeActivity"
+            android:name=".home.presentation.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
