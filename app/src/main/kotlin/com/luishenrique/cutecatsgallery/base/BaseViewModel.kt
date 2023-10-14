@@ -12,7 +12,7 @@ abstract class BaseViewModel : ViewModel() {
         block: suspend () -> T,
         onStartRequest: () -> Unit = {},
         onSuccess: (T) -> Unit,
-        onError: (Throwable) -> Unit,
+        onError: (ErrorContent) -> Unit,
         onFinally: () -> Unit = {}
     ) : Job {
         return viewModelScope.launch {
@@ -21,7 +21,7 @@ abstract class BaseViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) { block.invoke() }
                 onSuccess.invoke(response)
             }.onFailure {
-                onError.invoke(it)
+                onError.invoke(ErrorContent(it.message.toString(), it))
             }
             onFinally.invoke()
         }

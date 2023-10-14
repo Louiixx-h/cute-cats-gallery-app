@@ -1,7 +1,7 @@
 package com.luishenrique.cutecatsgallery.di
 
 import com.luishenrique.cutecatsgallery.BuildConfig
-import com.luishenrique.cutecatsgallery.network.CustomInterceptor
+import com.luishenrique.cutecatsgallery.network.CuteCatsInterceptor
 import okhttp3.OkHttpClient
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitModule {
     val instance = module {
-        factoryOf(::CustomInterceptor)
+        factoryOf(::CuteCatsInterceptor)
         factoryOf(::provideOkHttpClient)
         singleOf(::provideRetrofit)
     }
@@ -23,7 +23,7 @@ object RetrofitModule {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    private fun provideOkHttpClient(interceptor: CustomInterceptor): OkHttpClient {
+    private fun provideOkHttpClient(interceptor: CuteCatsInterceptor): OkHttpClient {
         return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
     }
 }

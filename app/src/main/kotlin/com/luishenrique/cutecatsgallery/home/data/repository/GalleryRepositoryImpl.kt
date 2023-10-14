@@ -1,12 +1,12 @@
 package com.luishenrique.cutecatsgallery.home.data.repository
 
+import com.luishenrique.cutecatsgallery.home.data.dataSource.GalleryDataSource
 import com.luishenrique.cutecatsgallery.home.data.mapper.GalleryMapper
-import com.luishenrique.cutecatsgallery.home.data.network.HomeApi
 import com.luishenrique.cutecatsgallery.home.domain.model.Gallery
 
-class GalleryRepositoryImpl(private val service: HomeApi) : GalleryRepository {
+class GalleryRepositoryImpl(private val dataSource: GalleryDataSource) : GalleryRepository {
 
     override suspend fun findAllCats(page: Int): Gallery {
-        return GalleryMapper.mapToModel(service.finAllCats(page = page))
+        return GalleryMapper.mapToModel(dataSource.finAllCats(page = page))
     }
 }

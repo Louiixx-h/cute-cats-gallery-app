@@ -1,30 +1,31 @@
 package com.luishenrique.cutecatsgallery.home.di
 
-import com.luishenrique.cutecatsgallery.home.data.network.HomeApi
+import com.luishenrique.cutecatsgallery.home.data.dataSource.GalleryDataSource
+import com.luishenrique.cutecatsgallery.home.data.dataSource.GalleryDataSourceImpl
+import com.luishenrique.cutecatsgallery.home.data.network.HomeApiService
 import com.luishenrique.cutecatsgallery.home.data.repository.GalleryRepository
 import com.luishenrique.cutecatsgallery.home.data.repository.GalleryRepositoryImpl
 import com.luishenrique.cutecatsgallery.home.domain.GalleryUseCase
 import com.luishenrique.cutecatsgallery.home.domain.GalleryUseCaseImpl
-import com.luishenrique.cutecatsgallery.home.presentation.HomeActivity
 import com.luishenrique.cutecatsgallery.home.presentation.HomeViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import kotlinx.coroutines.Job
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.scopedOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 object HomeModule {
     val instance = module {
-        scope<HomeActivity> {
-            scopedOf(::provideHomeApi)
-            factoryOf(::GalleryRepositoryImpl) bind GalleryRepository::class
-            factoryOf(::GalleryUseCaseImpl) bind GalleryUseCase::class
-            viewModelOf(::HomeViewModel)
-        }
+        singleOf(::provideHomeApi)
+        factoryOf(::GalleryDataSourceImpl) bind GalleryDataSource::class
+        factoryOf(::GalleryRepositoryImpl) bind GalleryRepository::class
+        factoryOf(::GalleryUseCaseImpl) bind GalleryUseCase::class
+        viewModel { HomeViewModel(get(), Job()) }
     }
 
-    private fun provideHomeApi(retrofit: Retrofit): HomeApi {
-        return retrofit.create(HomeApi::class.java)
+    private fun provideHomeApi(retrofit: Retrofit): HomeApiService {
+        return retrofit.create(HomeApiService::class.java)
     }
 }
