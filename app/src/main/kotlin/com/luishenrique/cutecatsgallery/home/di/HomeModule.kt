@@ -2,6 +2,7 @@ package com.luishenrique.cutecatsgallery.home.di
 
 import com.luishenrique.cutecatsgallery.home.data.dataSource.GalleryDataSource
 import com.luishenrique.cutecatsgallery.home.data.dataSource.GalleryDataSourceImpl
+import com.luishenrique.cutecatsgallery.home.data.mapper.GalleryMapper
 import com.luishenrique.cutecatsgallery.home.data.network.HomeApiService
 import com.luishenrique.cutecatsgallery.home.data.repository.GalleryRepository
 import com.luishenrique.cutecatsgallery.home.data.repository.GalleryRepositoryImpl
@@ -19,6 +20,7 @@ import retrofit2.Retrofit
 object HomeModule {
     val instance = module {
         singleOf(::provideHomeApi)
+        factoryOf(::GalleryMapper)
         factoryOf(::GalleryDataSourceImpl) bind GalleryDataSource::class
         factoryOf(::GalleryRepositoryImpl) bind GalleryRepository::class
         factoryOf(::GalleryUseCaseImpl) bind GalleryUseCase::class
