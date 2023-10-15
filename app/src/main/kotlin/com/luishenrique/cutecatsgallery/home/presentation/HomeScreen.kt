@@ -11,11 +11,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -46,8 +45,7 @@ import coil.compose.AsyncImage
 import com.luishenrique.cutecatsgallery.R
 import com.luishenrique.cutecatsgallery.base.ErrorContent
 import com.luishenrique.cutecatsgallery.commonComponents.Toolbar
-import com.luishenrique.cutecatsgallery.home.domain.model.CardImage
-import com.luishenrique.cutecatsgallery.home.domain.model.Gallery
+import com.luishenrique.cutecatsgallery.home.domain.model.Image
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -80,7 +78,7 @@ fun HomeScreen(
 
                 is GalleryUiState.Content -> {
                     GalleryList(
-                        items = (homeUiState as GalleryUiState.Content).gallery.data,
+                        images = (homeUiState as GalleryUiState.Content).images,
                         modifier = Modifier.padding(it)
                     )
                     refreshing.value = false
@@ -99,14 +97,14 @@ fun HomeScreen(
 }
 
 @Composable
-fun GalleryList(items: List<CardImage>, modifier: Modifier = Modifier) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp),
+fun GalleryList(images: List<Image>, modifier: Modifier = Modifier) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
         modifier = modifier
     ) {
-        items(items) {
-            GalleryCard(item = it)
+        items(images.count(), key = { it }) {
+            GalleryCard(item = images.getOrNull(it))
         }
     }
 }
@@ -121,7 +119,7 @@ fun LoadingIndicator() {
 }
 
 @Composable
-fun GalleryCard(item: CardImage) {
+fun GalleryCard(item: Image?) {
     val showShimmer = remember { mutableStateOf(true) }
     Card(
         colors = CardDefaults.cardColors(
@@ -131,13 +129,13 @@ fun GalleryCard(item: CardImage) {
             defaultElevation = 8.dp
         ),
         modifier = Modifier
-            .size(width = 64.dp, height = 256.dp)
+            .fillMaxSize()
             .padding(8.dp),
     ) {
         AsyncImage(
-            model = item.images.firstOrNull()?.link,
-            contentDescription = item.title,
-            contentScale = ContentScale.Crop,
+            model = item?.imageURL,
+            contentDescription = "",
+            contentScale = ContentScale.Fit,
             error = painterResource(id = R.drawable.ic_cat_loading),
             onSuccess = { showShimmer.value = false },
             onError = { showShimmer.value = false },
@@ -187,17 +185,6 @@ fun shimmerBrush(showShimmer: Boolean = true, targetValue: Float = 1000f): Brush
 @Preview
 @Composable
 fun PreviewErrorHome() {
-
-    val cards = mutableListOf<CardImage>()
-    for (i in 0..10) {
-        val card = CardImage(
-            title = "title",
-            username = "",
-            score = 0,
-            listOf()
-        )
-        cards.add(card)
-    }
     val stateMock = MutableStateFlow(GalleryUiState.Error(ErrorContent("", Throwable())))
     Surface(modifier = Modifier.fillMaxSize()) {
         HomeScreen(stateMock)
@@ -207,17 +194,6 @@ fun PreviewErrorHome() {
 @Preview
 @Composable
 fun PreviewLoadingHome() {
-
-    val cards = mutableListOf<CardImage>()
-    for (i in 0..10) {
-        val card = CardImage(
-            title = "title",
-            username = "",
-            score = 0,
-            listOf()
-        )
-        cards.add(card)
-    }
     val stateMock = MutableStateFlow(GalleryUiState.Loading)
     Surface(modifier = Modifier.fillMaxSize()) {
         HomeScreen(stateMock)
@@ -227,27 +203,14 @@ fun PreviewLoadingHome() {
 @Preview
 @Composable
 fun PreviewContentHome() {
-
-    val cards = mutableListOf<CardImage>()
-    for (i in 0..10) {
-        val card = CardImage(
-            title = "title",
-            username = "",
-            score = 0,
-            listOf()
-        )
-        cards.add(card)
-    }
-    val gallery = Gallery(
-        listOf(
-            CardImage("", "", 0, emptyList()),
-            CardImage("", "", 0, emptyList()),
-            CardImage("", "", 0, emptyList()),
-            CardImage("", "", 0, emptyList()),
-            CardImage("", "", 0, emptyList()),
-        )
+    val images = listOf(
+        Image(),
+        Image(),
+        Image(),
+        Image(),
+        Image(),
     )
-    val stateMock = MutableStateFlow(GalleryUiState.Content(gallery))
+    val stateMock = MutableStateFlow(GalleryUiState.Content(images))
     Surface(modifier = Modifier.fillMaxSize()) {
         HomeScreen(stateMock)
     }

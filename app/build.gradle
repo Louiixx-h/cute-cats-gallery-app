@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
 }
 
 android {
@@ -20,12 +21,12 @@ android {
         debug {
             minifyEnabled false
             debuggable = true
-            buildConfigField "String", "API_URL", "\"https://api.imgur.com/3/\""
+            buildConfigField "String", "API_URL", "\"https://api.thecatapi.com/v1/\""
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
         release {
             minifyEnabled true
-            buildConfigField "String", "API_URL", "\"https://api.imgur.com/3/\""
+            buildConfigField "String", "API_URL", "\"https://api.thecatapi.com/v1/\""
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
