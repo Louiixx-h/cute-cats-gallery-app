@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material.ExperimentalMaterialApi
@@ -62,14 +61,13 @@ fun HomeScreen(
         onRefresh.invoke()
     })
 
-    Scaffold(
-        topBar = {
-            Toolbar { Text("Cute Cats Gallery") }
-        }
-    ) {
+    Scaffold(topBar = { Toolbar { Text("Cute Cats Gallery") } }) {
         Box(
-            modifier = Modifier.fillMaxSize().pullRefresh(pullRefreshState),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .pullRefresh(pullRefreshState)
         ) {
             when (homeUiState) {
                 is GalleryUiState.Loading -> {
@@ -79,7 +77,7 @@ fun HomeScreen(
                 is GalleryUiState.Content -> {
                     GalleryList(
                         images = (homeUiState as GalleryUiState.Content).images,
-                        modifier = Modifier.padding(it)
+                        modifier = Modifier.fillMaxSize()
                     )
                     refreshing.value = false
                 }
