@@ -6,7 +6,9 @@ plugins {
 
 android {
     compileSdk 34
-
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+    }
     defaultConfig {
         applicationId "com.luishenrique.cutecatsgallery"
         minSdkVersion 21
@@ -69,6 +71,8 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     implementation 'com.google.accompanist:accompanist-swiperefresh:0.32.0'
+
+    implementation 'com.google.guava:guava:27.0.1-android'
 
     // progressbar cat
     implementation "com.roger.catloadinglibrary:catloadinglibrary:1.0.9"
