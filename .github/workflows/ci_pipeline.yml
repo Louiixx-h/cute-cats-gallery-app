@@ -27,7 +27,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build
-        run: ./gradlew :app:assembleDebug
+        run: ./gradlew assembleDebug
 
       - name: Run Lint
         run: ./gradlew ktlintCheck
