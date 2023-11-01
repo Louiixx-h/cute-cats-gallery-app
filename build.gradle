@@ -10,6 +10,8 @@ buildscript {
         klint_version = "9.2.1"
         compose_version = "1.5.3"
         compose_compiler_version = "1.4.3"
+        mockk_version = "1.13.8"
+        testng_version = "7.3.0"
     }
     repositories {
         google()

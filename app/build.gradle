@@ -61,6 +61,8 @@ dependencies {
     implementation "androidx.compose.material:material-android:1.5.3"
     implementation "io.coil-kt:coil-compose:2.4.0"
     implementation "androidx.navigation:navigation-compose:2.7.4"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     androidTestImplementation platform("androidx.compose:compose-bom:2023.10.00")
@@ -83,10 +85,16 @@ dependencies {
     // viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
 
+    // Testng
+    implementation "org.testng:testng:$testng_version"
+
+    // Mockk
+    testImplementation "io.mockk:mockk:$mockk_version"
+
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "com.google.android.material:material:1.10.0"
     implementation "androidx.appcompat:appcompat:1.6.1"
-    testImplementation "junit:junit:4.13.2"
+    testImplementation "junit:junit:*"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 }
