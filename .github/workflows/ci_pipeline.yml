@@ -1,37 +1,40 @@
 name: cute-cat-gallery-ci-pipeline
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [ main, develop ]
   push:
-    branches: [main, develop]
+    branches: [ main, develop ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4.1.0
+
       - name: Setup Java JDK
         uses: actions/setup-java@v3.13.0
         with:
           java-version: '17'
           distribution: 'adopt'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.9.0
+        with:
+          gradle-version: 8.1.1
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - name: Gradle Build Action
-        uses: gradle/gradle-build-action@v2.9.0
-        with:
-          arguments: build
-          gradle-version: 7.6
-      - name: Run KLint
-        uses: gradle/gradle-build-action@v2.9.0
-        with:
-          arguments: ktlintCheck
-          gradle-version: 7.6
+
+      - name: Build
+        run: ./gradlew assembleDebug
+
+      - name: Run Lint
+        run: ./gradlew ktlintCheck
+
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2.9.0
-        with:
-          arguments: test
-          gradle-version: 7.6
+        run: ./gradlew testDebugUnitTest
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
